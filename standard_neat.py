@@ -57,9 +57,9 @@ def add_node(connections, genotype, debug=False):
     new_node = (to_node - from_node) / 2 + from_node
 
     if debug:
-        print "from:", from_node
-        print "to:", to_node
-        print "new:", new_node
+        print("from:", from_node)
+        print("to:", to_node)
+        print("new:", new_node)
     # todo: what to do if node id already exist? -> just leave it be.
 
     # add two new connection items: from_node -> new_node; new_node -> to_node
@@ -146,23 +146,23 @@ def start_neuroevolution(x, y, x_test, y_test):
     """starts neuroevolution on binary dataset"""
 
     connections = [(0, INPUT0, OUTPUT0), (1, INPUT1, OUTPUT0), (2, INPUT0, OUTPUT1), (3, INPUT1, OUTPUT1)]
-    genotypes = [{0: True, 1: True, 2: True, 3: True} for d in xrange(5)]
+    genotypes = [{0: True, 1: True, 2: True, 3: True} for d in range(5)]
 
-    for its in xrange(0,100):
-        print "iteration", its
+    for its in range(0,100):
+        print( "iteration", its)
 
         fitnesses = []
         # test networks
-        for i in xrange(0,len(genotypes)):
+        for i in range(0,len(genotypes)):
             fitnesses.append(eval_fitness(connections, genotypes[i], x, y, x_test, y_test, run_id=str(its) + "/" + str(i)))
 
         # get indices of sorted list
         fitnesses_sorted_indices = [i[0] for i in reversed(sorted(enumerate(fitnesses), key=lambda x: x[1]))]
 
-        print "connections:\n"
-        print connections
-        for ra in xrange(0,len(fitnesses_sorted_indices)):
-            print fitnesses[fitnesses_sorted_indices[ra]], genotypes[fitnesses_sorted_indices[ra]]
+        print("connections:\n")
+        print(connections)
+        for ra in range(0,len(fitnesses_sorted_indices)):
+            print (fitnesses[fitnesses_sorted_indices[ra]], genotypes[fitnesses_sorted_indices[ra]])
 
         # run evolutions
         # todo: fiddle with parameters, include size of network in fitness?
@@ -172,11 +172,11 @@ def start_neuroevolution(x, y, x_test, y_test):
         if m > len(fitnesses):
             m = len(fitnesses)
 
-        for i in xrange(0,m):
-            print "adding:", fitnesses[fitnesses_sorted_indices[i]], genotypes[fitnesses_sorted_indices[i]]
+        for i in range(0,m):
+            print( "adding:", fitnesses[fitnesses_sorted_indices[i]], genotypes[fitnesses_sorted_indices[i]])
             new_gen.append(genotypes[fitnesses_sorted_indices[i]])
 
-        for i in xrange(0,len(fitnesses_sorted_indices)):
+        for i in range(0,len(fitnesses_sorted_indices)):
             fi = fitnesses_sorted_indices[i]
             r = np.random.uniform()
             # select the best for mutation and breeding, kill of worst.

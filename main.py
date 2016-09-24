@@ -11,8 +11,8 @@ x, y = get_gaussian_quantiles(n_samples=100)
 x_test, y_test = get_gaussian_quantiles(n_samples=100)
 
 
-print x.shape
-print y.shape
+print(x.shape)
+print(y.shape)
 start_neuroevolution(x, y, x_test, y_test)
 
 # build_and_test(connections, genotype, x, y, x_test, y_test)

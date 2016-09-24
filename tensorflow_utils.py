@@ -42,7 +42,7 @@ def build_and_test(connections, genotype, x, y, x_test, y_test, run_id="1"):
 
     # filter connections
     exisiting_connections = []
-    for i in xrange(0,len(genotype_keys)):
+    for i in range(0,len(genotype_keys)):
         if genotype[genotype_keys[i]]:
             exisiting_connections.append(connections[genotype_keys[i]])
 
@@ -51,7 +51,7 @@ def build_and_test(connections, genotype, x, y, x_test, y_test, run_id="1"):
 
     # merge the same nodes
     connections_merged = [[connections_sorted[0][2],[connections_sorted[0][1]]]]
-    for i in xrange(1,len(connections_sorted)):
+    for i in range(1,len(connections_sorted)):
         # same as last node
         if connections_sorted[i][2] == connections_merged[-1][0]:
             connections_merged[-1][1].append(connections_sorted[i][1])
@@ -106,7 +106,7 @@ def build_and_test(connections, genotype, x, y, x_test, y_test, run_id="1"):
 
     sess.run(init)
 
-    for i in xrange(1000):
+    for i in range(1000):
         _, loss_val, summary = sess.run([opt, loss, merged], feed_dict={x0: np.expand_dims(x[:, 0], 1),x1: np.expand_dims(x[:, 1], 1), y_: y})
         if i % 100 == 0:
             train_writer.add_summary(summary, i)
